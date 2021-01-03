@@ -21,9 +21,9 @@ public final class MessageManager {
      * Constructs a new MessageManager object.
      * A server socket is created on a random port.
      */
-    public MessageManager(int port) {
+    public MessageManager() {
         try {
-            serverSocket = new ServerSocket(port);
+            serverSocket = new ServerSocket(0);
             InetAddress inetAddress = InetAddress.getLocalHost();
             String ipAddress = inetAddress.getHostAddress();
             int portNumber = serverSocket.getLocalPort();
