@@ -20,7 +20,7 @@ public class DocumentSkeleton implements Runnable{
 
     private void handleGetText(MethodCallMessage request){
         MethodCallMessage replyMessage = new MethodCallMessage(messageManager.getMyAddress(), "getTextReply");
-        replyMessage.setParameter("text", document.getText());
+        replyMessage.setParameter("textString", document.getText());
         messageManager.send(replyMessage, request.getOriginator());
     }
 
@@ -35,7 +35,11 @@ public class DocumentSkeleton implements Runnable{
     }
 
     private void handleSetChar(MethodCallMessage request){
-
+        int position = Integer.parseInt(request.getParameter("position"));
+        char c =  request.getParameter("c").charAt(0);
+        document.setChar(position,c);
+        MethodCallMessage replyMessage = new MethodCallMessage(messageManager.getMyAddress(),"setCharReply");
+        messageManager.send(replyMessage, request.getOriginator());
     }
 
     private void handleRequest(MethodCallMessage request){

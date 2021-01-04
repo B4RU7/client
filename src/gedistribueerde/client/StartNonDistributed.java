@@ -6,6 +6,10 @@ import gedistribueerde.server.Server;
 
 public class StartNonDistributed {
     public static void main(String[] args) {
+      //  Server server = new ServerImpl();
+      //  DocumentImpl document = new DocumentImpl();
+      //  Client client = new Client(server, document);
+      //  client.run();
         if (args.length != 2) {
             System.exit(1);
         }
@@ -19,5 +23,6 @@ public class StartNonDistributed {
         Server serverStub = new ServerStub(serverAddress, documentSkeleton.getAddress());
         Client client = new Client(serverStub, document);
         client.run();
+
     }
 }
