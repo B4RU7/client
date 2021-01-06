@@ -30,9 +30,9 @@ public class Client {
         server.toLower(document);
         server.log(document);
 
-/*        // stap 4
+        // stap 4
         server.type(document, "Hello, world!");
         server.log(document);
-*/
+
     }
 }

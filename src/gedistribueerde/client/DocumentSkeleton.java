@@ -31,7 +31,9 @@ public class DocumentSkeleton implements Runnable{
     }
 
     private void handleAppend(MethodCallMessage request){
-
+        document.append(request.getParameter("c").charAt(0));
+        MethodCallMessage replyMessage = new MethodCallMessage(messageManager.getMyAddress(),"appendReply");
+        messageManager.send(replyMessage,request.getOriginator());
     }
 
     private void handleSetChar(MethodCallMessage request){

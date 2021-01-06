@@ -77,6 +77,18 @@ public class ServerStub implements Server {
 
     @Override
     public void type(Document document, String text) {
+        MethodCallMessage append = new MethodCallMessage(messageManager.getMyAddress(),"type");
+        append.setParameter("typeText",text);
+        append.setParameter("documentSkeletonAddress", documentSkeletonAddress.toString());
+
+        messageManager.send(append,serverNetworkAddress);
+
+        MethodCallMessage reply = messageManager.wReceive();
+        if (!reply.getMethodName().equals("typeReply")) {
+            throw new RuntimeException("Received reply is not equal to 'typeReply'! Instead received:  " + reply.getMethodName());
+        } else {
+            System.out.println("Received reply with name: " + reply.getMethodName());
+        }
 
     }
 }
