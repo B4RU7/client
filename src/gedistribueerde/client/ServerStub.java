@@ -23,9 +23,9 @@ public class ServerStub implements Server {
         messageManager.send(log,serverNetworkAddress);
 
         MethodCallMessage reply = messageManager.wReceive();
-        if (!reply.getMethodName().equals("logReply")) {
-            throw new RuntimeException("Received reply is not equal to 'logReply'! Instead received:  " + reply.getMethodName());
-        } else System.out.println("Received reply with name: " + reply.getMethodName());
+        if (!reply.getMethodName().equals("logReply"))
+            throw new RuntimeException("Received reply is not equal to 'logReply'!");
+        else System.out.println(reply.getMethodName());
     }
 
     @Override
@@ -36,43 +36,35 @@ public class ServerStub implements Server {
 
         MethodCallMessage reply = messageManager.wReceive();
         if (!reply.getMethodName().equals("createReply")) {
-            throw new RuntimeException("Received reply is not equal to 'createReply'! Instead received:  " + reply.getMethodName());
+            throw new RuntimeException("Received reply is not equal to 'createReply'!");
         } else {
-            System.out.println("Received reply with name: " + reply.getMethodName());
-           return new DocumentImpl(reply.getParameter("s"));
+            System.out.println(reply.getMethodName());
+            return new DocumentImpl(reply.getParameter("s"));
         }
     }
 
     @Override
     public void toUpper(Document document) {
         MethodCallMessage toUpper = new MethodCallMessage(messageManager.getMyAddress(),"toUpper");
-     //   toUpper.setParameter("documentToUpperText", document.getText());
         toUpper.setParameter("documentSkeletonAddress", documentSkeletonAddress.toString());
-
         messageManager.send(toUpper,serverNetworkAddress);
 
         MethodCallMessage reply = messageManager.wReceive();
         if (!reply.getMethodName().equals("toUpperReply")) {
-            throw new RuntimeException("Received reply is not equal to 'toUpperReply'! Instead received:  " + reply.getMethodName());
-        } else {
-            System.out.println("Received reply with name: " + reply.getMethodName());
-        }
+            throw new RuntimeException("Received reply is not equal to 'toUpperReply'!");
+        } else System.out.println(reply.getMethodName());
     }
 
     @Override
     public void toLower(Document document) {
         MethodCallMessage toLower = new MethodCallMessage(messageManager.getMyAddress(),"toLower");
-     //   toUpper.setParameter("documentToUpperText", document.getText());
         toLower.setParameter("documentSkeletonAddress", documentSkeletonAddress.toString());
-
         messageManager.send(toLower,serverNetworkAddress);
 
         MethodCallMessage reply = messageManager.wReceive();
         if (!reply.getMethodName().equals("toLowerReply")) {
-            throw new RuntimeException("Received reply is not equal to 'toLowerReply'! Instead received:  " + reply.getMethodName());
-        } else {
-            System.out.println("Received reply with name: " + reply.getMethodName());
-        }
+            throw new RuntimeException("Received reply is not equal to 'toLowerReply'!");
+        } else System.out.println(reply.getMethodName());
     }
 
     @Override
@@ -80,15 +72,12 @@ public class ServerStub implements Server {
         MethodCallMessage append = new MethodCallMessage(messageManager.getMyAddress(),"type");
         append.setParameter("typeText",text);
         append.setParameter("documentSkeletonAddress", documentSkeletonAddress.toString());
-
         messageManager.send(append,serverNetworkAddress);
 
         MethodCallMessage reply = messageManager.wReceive();
         if (!reply.getMethodName().equals("typeReply")) {
-            throw new RuntimeException("Received reply is not equal to 'typeReply'! Instead received:  " + reply.getMethodName());
-        } else {
-            System.out.println("Received reply with name: " + reply.getMethodName());
-        }
+            throw new RuntimeException("Received reply is not equal to 'typeReply'!");
+        } else System.out.println(reply.getMethodName());
 
     }
 }
